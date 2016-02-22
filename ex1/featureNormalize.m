@@ -27,7 +27,8 @@ sigma = zeros(1, size(X, 2));
 %       
 sigma = std(X); 
 mu = mean(X);
-X_norm = (X .- mu)./(sigma);
+%X_norm = (X .- mu)./(sigma);
+X_norm = bsxfun(@rdivide, bsxfun(@minus,X,mu),sigma);
 
 
 
