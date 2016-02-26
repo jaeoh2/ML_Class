@@ -96,7 +96,14 @@ Delta2 = d3' * a2;
 Theta1_grad = (1/m)*Delta1;
 Theta2_grad = (1/m)*Delta2;
 
+% Regularization
+Temp1 = Theta1;
+Temp2 = Theta2;
+Temp1(:,1) = 0;
+Temp2(:,1) = 0;
 
+Theta1_grad = Theta1_grad + (lambda/m)*Temp1;
+Theta2_grad = Theta2_grad + (lambda/m)*Temp2;
 
 
 
