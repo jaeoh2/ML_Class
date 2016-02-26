@@ -68,10 +68,12 @@ y_mat = eye_mat(y,:);
 %Feed Forward
 a1 = [ones(m,1) X];
 
-a2 = sigmoid(a1*Theta1');
+z2 = a1*Theta1';
+a2 = sigmoid(z2);
 a2 = [ones(m,1) a2];
 
-a3 = sigmoid(a2*Theta2');
+z3 = a2*Theta2';
+a3 = sigmoid(z3);
 hx = a3;
 
 %Cost Function
@@ -83,12 +85,16 @@ Temp1(:,1) = 0;
 Temp2(:,1) = 0;
 J = J + (lambda/(2*m))*( sum(sum(Temp1.^2)) + sum(sum(Temp2.^2)) );
 
+% Back Propagation
+d3 = a3 - y_mat;
 
+d2 = d3*Theta2(:,2:end).*sigmoidGradient(z2);
 
+Delta1 = d2' * a1;
+Delta2 = d3' * a2;
 
-
-
-
+Theta1_grad = (1/m)*Delta1;
+Theta2_grad = (1/m)*Delta2;
 
 
 
