@@ -25,12 +25,15 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
+eye_mat = eye(K);
+idx_mat = eye_mat(idx,:);
 
+centroids = idx_mat'*X;
 
-
-
-
-
+for i = 1:K
+    sel = find(idx == i);
+    centroids(i,:) = centroids(i,:)/length(sel);
+end
 
 
 % =============================================================
